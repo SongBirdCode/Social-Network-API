@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "g": "^2.0.1",
+    "mongoose": "^8.4.0",
     "node": "^18.20.3",
     "pg": "^8.11.5"
   }
