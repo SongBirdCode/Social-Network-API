@@ -2,7 +2,7 @@ const { Thought, User } = require("../models");
 
 const thoughtController = {
   // get all Thoughts
-  getAllThought(req, res) {
+  async getAllThought(req, res) {
     Thought.find({})
       .populate({
         path: "reactions",
@@ -18,7 +18,7 @@ const thoughtController = {
   },
 
   // get one Thought by id
-  getThoughtById({ params }, res) {
+  async getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.id })
       .populate({
         path: "reactions",
@@ -39,7 +39,7 @@ const thoughtController = {
 
   // create Thought
   // push the created thought's _id to the associated user's thoughts array field
-  createThought({ params, body }, res) {
+  async createThought({ params, body }, res) {
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
@@ -61,7 +61,7 @@ const thoughtController = {
   },
 
   // update Thought by id
-  updateThought({ params, body }, res) {
+  async updateThought({ params, body }, res) {
     Thought.findOneAndUpdate({ _id: params.id }, body, {
       new: true,
       runValidators: true,
@@ -77,7 +77,7 @@ const thoughtController = {
   },
 
   // delete Thought
-  deleteThought({ params }, res) {
+ async deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.id })
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
@@ -103,7 +103,7 @@ const thoughtController = {
   },
 
   // add reaction
-  addReaction({ params, body }, res) {
+  async addReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $addToSet: { reactions: body } },
@@ -120,7 +120,7 @@ const thoughtController = {
   },
 
   // delete reaction
-  removeReaction({ params }, res) {
+  async removeReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $pull: { reactions: { reactionId: params.reactionId } } },
