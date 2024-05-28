@@ -46,9 +46,9 @@
 
 ## Results
 
-<img src=./Social-Network-API/screenshot/screenshot1.jpg>
-<img src=./Social-Network-API/screenshot/screenshot2.jpg>
-<img src=./Social-Network-API/screenshot/screenshot3.jpg>
+<img src=./screenshot/screenshot1.jpg>
+<img src=./screenshot/screenshot2.jpg>
+<img src=./screenshot/screenshot3.jpg>
 
 Video Walkthrough:  
 
