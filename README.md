@@ -49,6 +49,8 @@
 <img src=./screenshot/screenshot1.jpg>
 <img src=./screenshot/screenshot2.jpg>
 <img src=./screenshot/screenshot3.jpg>
+<img src=./screenshot/screenshot4.jpg>
+<img src=./screenshot/screenshot5.jpg>
 
 Video Walkthrough:  
 
