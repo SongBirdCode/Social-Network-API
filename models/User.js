@@ -1,47 +1,52 @@
-const { Schema, model } = require("mongoose");
-
-const UserSchema = new Schema(
+// Importing the required dependencies from the mongoose library
+const { Schema, model, Types } = require('mongoose'); 
+// Defining the User schema with the required fields and their respective data types
+const userSchema = new Schema(
   {
     username: {
-      type: String,
-      unique: true,
-      trim: true,
-      required: "Username is Required",
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
     },
-
+      // using regular expression to validate email format
     email: {
-      type: String,
-      unique: true,
-      required: "Username is Required",
-      match: [/.+@.+\..+/],
+        type: String,
+        required: true,
+        unique: true,
+        validate: { 
+          validator: function(v) {
+              return /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(v);
+          }
+      }
     },
 
-    thoughts: [
+    friends:[
       {
         type: Schema.Types.ObjectId,
-        ref: "Thought",
-      },
-    ],
-
-    friends: [
+        ref: 'User',
+    }
+  ],
+    thoughts:[
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+        ref: 'Thought',
+    }
+  ],
   },
   {
     toJSON: {
-      virtuals: true,
+      virtuals: true, // enables virtual properties to be displayed when a user document is transformed into JSON format
     },
-    id: false,
-  }
+    id: false, // disables the default '_id' field in the User model to be returned when calling toJSON() method
+}
 );
 
-UserSchema.virtual("friendCount").get(function () {
-  return this.friends.length;
+// Defining a virtual property 'friendCount' which returns the number of friends in the friends array
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length;
 });
-
-const User = model("User", UserSchema);
-
-module.exports = User;
+// Creating the User model from the userSchema
+const User = model('User',userSchema)
+// Exporting the User model as a module
+module.exports = User
