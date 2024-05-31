@@ -1,6 +1,8 @@
 const { User, Thought } = require("../models");
 
 const userController = {
+
+  
   // get all users
  async getAllUser(req, res) {
     User.find({})
@@ -66,6 +68,7 @@ const userController = {
       .catch((err) => res.json(err));
   },
 
+
   // delete user
  async deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
@@ -82,6 +85,7 @@ const userController = {
       })
       .catch((err) => res.json(err));
   },
+
 
   // add friend
   async addFriend({ params }, res) {
@@ -100,6 +104,7 @@ const userController = {
       .catch((err) => res.json(err));
   },
 
+
   // delete friend
   async removeFriend({ params }, res) {
     User.findOneAndUpdate(
@@ -116,4 +121,6 @@ const userController = {
       .catch((err) => res.json(err));
   },
 };
+
+
 module.exports = userController;

@@ -38,7 +38,7 @@ const thoughtController = {
   },
 
   // create Thought
-  // push the created thought's _id to the associated user's thoughts array field
+  // push the created thought's id to the associated user's thoughts array field //
   async createThought({ params, body }, res) {
     Thought.create(body)
       .then(({ _id }) => {
@@ -77,12 +77,13 @@ const thoughtController = {
   },
 
   // delete Thought
- async deleteThought({ params }, res) {
+ async deleteThought({ params }, req, res) {
     Thought.findOneAndDelete({ _id: params.id })
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           return res.status(404).json({ message: "No thought with this id!" });
         }
+
 
         // remove thought id from user's `thoughts` field
         return User.findOneAndUpdate(
@@ -103,7 +104,7 @@ const thoughtController = {
   },
 
   // add reaction
-  async addReaction({ params, body }, res) {
+  async addReaction({ params, body }, req,res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $addToSet: { reactions: body } },
@@ -118,6 +119,7 @@ const thoughtController = {
       })
       .catch((err) => res.json(err));
   },
+
 
   // delete reaction
   async removeReaction({ params }, res) {
