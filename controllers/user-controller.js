@@ -88,6 +88,4 @@ const UserController = {
   },
 };
 
-
-// Export UserController
-module.exports = UserController;
+module.exports = UserController

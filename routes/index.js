@@ -1,12 +1,9 @@
-const router = require("express").Router();
-const apiRoutes = require("./api");
+const router = require('express').Router(); 
+const apiRoutes = require('./api');
+router.use('./api',apiRoutes);
+router.use((req, res)=>{
+    return res.status(404).send('Not found');
 
-// In order to communicate with routes within api and if the read for any reason fails we will see an error code //
-
-router.use("/api", apiRoutes);
-
-router.use((req, res) => {
-  res.status(404).send("<h1>😝 404 Error!</h1>");
 });
 
 module.exports = router;
